@@ -24,15 +24,11 @@ h_x = X * theta; % 12*1
 delta = h_x - y;
 J = sum(delta .* delta) / 2 / m + sum(theta(2:end, :) .* theta(2:end, :)) * lambda / 2 / m;
 
-
-
-
-
-
-
-
 % =========================================================================
 
-grad = grad(:);
+grad(1) = sum(delta .* X(:, 1)) / m;
+for i = 2 : size(theta, 1)
+  grad(i) = sum(delta .* X(:, i)) / m + lambda * theta(i) / m;
+end
 
 end
